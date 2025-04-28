@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+    <h1>Bienvenue sur ton dashboard</h1>
+
+    {% if user %}
+        <p>Bonjour {{ user.firstname ?? user.username }} !</p>
+    {% else %}
+        <p>Non connecté ? 🤔</p>
+    {% endif %}
+{% endblock %}
