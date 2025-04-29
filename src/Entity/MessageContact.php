@@ -32,6 +32,11 @@ class MessageContact
     #[ORM\ManyToOne(inversedBy: 'id_messageContacts')]
     private ?Utilisateur $id_utilisateur = null;
 
+    public function __construct()
+    {
+        $this->date_envoi = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

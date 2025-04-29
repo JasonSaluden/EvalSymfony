@@ -25,6 +25,11 @@ class Utilisateur
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    public function __construct()
+    {
+        $this->dateInscription = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

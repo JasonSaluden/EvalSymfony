@@ -2,17 +2,52 @@
 
 namespace App\Controller;
 
+use App\Entity\MessageContact;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class ContactController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+
     #[Route('/contact', name: 'contact_form')]
     public function index(): Response
     {
+        // Récupérer l'utilisateur connecté
+        $user = $this->getUser();
+
+        // Initialiser les variables à passer au template
+        $userData = [
+            'email' => '',
+            'prenom' => '',
+            'nom' => ''
+        ];
+
+        // Si l'utilisateur est connecté, récupérer ses informations
+        if ($user) {
+            $userData['email'] = $user->getEmail();
+
+            // Récupérer l'entité Utilisateur associée
+            $utilisateur = $user->getUtilisateur();
+
+            if ($utilisateur) {
+                $userData['prenom'] = $utilisateur->getPrenom() ?: '';
+                $userData['nom'] = $utilisateur->getNom() ?: '';
+            }
+        }
+
         return $this->render('contact/index.html.twig', [
             'controller_name' => 'ContactController',
+            'userData' => $userData
         ]);
     }
 
@@ -24,10 +59,30 @@ final class ContactController extends AbstractController
         $firstName = $request->request->get('first_name');
         $lastName = $request->request->get('last_name');
         $subject = $request->request->get('subject');
-        $message = $request->request->get('message');
+        $messageText = $request->request->get('message');
 
+        // Créer une nouvelle instance de MessageContact
+        $messageContact = new MessageContact();
+        $messageContact->setEmail($email);
+        $messageContact->setNom("$firstName $lastName"); // Ou vous pouvez stocker prénom et nom séparément selon votre schéma
+        $messageContact->setSujet($subject);
+        $messageContact->setMessage($messageText);
+        // La date d'envoi est déjà initialisée dans le constructeur
 
-        // Pour l'instant, on redirige simplement vers une page de confirmation
-        return $this->redirectToRoute('contact_form_success');
+        // Si l'utilisateur est connecté, associer le message à son compte
+        $user = $this->getUser();
+        if ($user && $user->getUtilisateur()) {
+            $messageContact->setIdUtilisateur($user->getUtilisateur());
+        }
+
+        // Enregistrer le message dans la base de données
+        $this->entityManager->persist($messageContact);
+        $this->entityManager->flush();
+
+        // Ajouter un message flash de confirmation
+        $this->addFlash('success', 'Votre message a été envoyé avec succès. Nous vous répondrons dans les plus brefs délais.');
+
+        // Rediriger vers la page de contact
+        return $this->redirectToRoute('contact_form');
     }
 }

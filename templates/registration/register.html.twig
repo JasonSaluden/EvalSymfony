@@ -71,32 +71,15 @@
         <h2>INSCRIPTION</h2>
 
         {{ form_start(registrationForm) }}
-            <div class="form-group">
-        {{ form_label(registrationForm.email) }}
-        {{ form_widget(registrationForm.email) }}
-        {{ form_errors(registrationForm.email) }}
-    </div>
+    {{ form_row(registrationForm.email) }}
+    {{ form_row(registrationForm.plainPassword) }}
 
-    <div class="form-group">
-        {{ form_label(registrationForm.plainPassword) }}
-        {{ form_widget(registrationForm.plainPassword) }}
-        {{ form_errors(registrationForm.plainPassword) }}
-    </div>
+    <h3>Informations personnelles</h3>
+    {{ form_row(registrationForm.utilisateur.nom) }}
+    {{ form_row(registrationForm.utilisateur.prenom) }}
 
-    <div class="form-group">
-        {{ form_label(registrationForm.nom) }}  <!-- Assurez-vous que ce champ existe -->
-        {{ form_widget(registrationForm.nom) }}
-        {{ form_errors(registrationForm.nom) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(registrationForm.prenom) }}  <!-- Assurez-vous que ce champ existe -->
-        {{ form_widget(registrationForm.prenom) }}
-        {{ form_errors(registrationForm.prenom) }}
-    </div>
-
-    <button type="submit">S'inscrire</button>
-        {{ form_end(registrationForm) }}
+    <button type="submit" class="btn">S'inscrire</button>
+{{ form_end(registrationForm) }}
 
         <div class="login-link">
             <p>Déjà inscrit ? <a href="{{ path('app_login') }}">Connectez-vous ici</a></p>

@@ -16,26 +16,22 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="name" class="form-label">Nom :</label>
-                        <input type="text" class="form-control" id="name" value="Doe" readonly>
+                        <input type="text" class="form-control" id="name" value={{utilisateur.nom}} readonly>
                     </div>
                     <div class="col-md-6">
                         <label for="first_name" class="form-label">Prénom :</label>
-                        <input type="text" class="form-control" id="first_name" value="John" readonly>
+                        <input type="text" class="form-control" id="first_name" value={{utilisateur.prenom}} readonly>
                     </div>
-                </div>
-                <div class="mb-3">
-                    <label for="address" class="form-label">Adresse :</label>
-                    <input type="text" class="form-control" id="address" value="123 rue Exemple" readonly>
-                </div>
-                <div class="mb-3">
-                    <label for="birthdate" class="form-label">Date de naissance :</label>
-                    <input type="text" class="form-control" id="birthdate" value="01/01/1990" readonly>
+                    <div class="col-md-6">
+                        <label for="first_name" class="form-label">Date inscription :</label>
+                        <input type="text" class="form-control" id="registration_date" value="{{ utilisateur.dateInscription|date('d/m/Y') }}" readonly>
+                    </div>
                 </div>
             </form>
         </div>
 
         <!-- Section Authentification -->
-        <div class="section-content">
+        {# <div class="section-content">
             <div class="section-header">Authentification</div>
             <form>
                 <div class="mb-3">
@@ -47,11 +43,6 @@
                     <input type="password" class="form-control" id="password" value="********" readonly>
                 </div>
             </form>
-        </div>
-
-        <!-- Section Actions -->
-        <div class="text-center">
-            <button class="btn-save">Sauvegarder</button>
-        </div>
+        </div> #}
     </div>
 {% endblock %}
