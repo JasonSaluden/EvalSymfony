@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class RegistrationFormType  extends AbstractType
 {
@@ -27,6 +28,8 @@ class RegistrationFormType  extends AbstractType
                     ]),
                 ],
             ])
+            ->add('nom', TextType::class)
+            ->add('prenom', TextType::class)
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false, 
                 'attr' => ['autocomplete' => 'new-password'],

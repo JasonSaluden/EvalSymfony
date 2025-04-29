@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Espace{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/account.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        <h1 class="text-center">Mon Espace</h1>
+
+        <div class="section-content">
+            <div class="section-header">Informations personnelles</div>
+            <form>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="name" class="form-label">Nom :</label>
+                        <input type="text" class="form-control" id="name" value="Doe" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="first_name" class="form-label">Prénom :</label>
+                        <input type="text" class="form-control" id="first_name" value="John" readonly>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Adresse :</label>
+                    <input type="text" class="form-control" id="address" value="123 rue Exemple" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="birthdate" class="form-label">Date de naissance :</label>
+                    <input type="text" class="form-control" id="birthdate" value="01/01/1990" readonly>
+                </div>
+            </form>
+        </div>
+
+        <!-- Section Authentification -->
+        <div class="section-content">
+            <div class="section-header">Authentification</div>
+            <form>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email :</label>
+                    <input type="email" class="form-control" id="email" value="johndoe@example.com" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Mot de passe :</label>
+                    <input type="password" class="form-control" id="password" value="********" readonly>
+                </div>
+            </form>
+        </div>
+
+        <!-- Section Actions -->
+        <div class="text-center">
+            <button class="btn-save">Sauvegarder</button>
+        </div>
+    </div>
+{% endblock %}

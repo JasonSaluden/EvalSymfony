@@ -11,26 +11,38 @@
         padding: 0;
         text-align: center;
     }
-    .login-container {
+    .register-container {
         background-color: #e6ddce;
         border: 4px solid red;
         border-radius: 25px;
         width: 400px;
         margin: 80px auto;
         padding: 40px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
-    .login-container h2 {
+    .register-container h2 {
         margin-bottom: 30px;
         font-size: 24px;
     }
-    input[type="text"], input[type="password"], input[type="email"] {
+    .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    input[type="email"], input[type="password"] {
         width: 100%;
         padding: 12px;
-        margin: 10px 0;
+        margin: 5px 0;
         border-radius: 10px;
         border: 1px solid #ccc;
         box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    .checkbox-group {
+        text-align: left;
+        margin: 15px 0;
     }
     button {
         background-color: #3c9c3c;
@@ -40,25 +52,53 @@
         border-radius: 8px;
         font-size: 18px;
         cursor: pointer;
+        margin-top: 10px;
+    }
+    .error-text {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    .login-link {
+        margin-top: 20px;
     }
 </style>
 {% endblock %}
 
 {% block body %}
-    <div class="login-container">
-            <img src="{{ asset('images/Logo PowerCash.png') }}" alt="Logo" style="width: 150px;">
+    <img src="{{ asset('images/Logo PowerCash.png') }}" alt="Logo" style="width: 150px;">
+    <div class="register-container">
+        <h2>INSCRIPTION</h2>
 
-        <h2>Inscription</h2>
-
-        {{ form_errors(registrationForm) }}
-
-        {{ form_start(registrationForm, { 'method': 'POST' }) }}
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.plainPassword, { label: 'Password' }) }}
-            {{ form_row(registrationForm.agreeTerms) }}
-            <button type="submit">S'inscrire</button>
-        {{ form_end(registrationForm) }}
-        <h3>Déjà inscrit ?</h3>
-        <a href="{{ path('app_login') }}">Se connecter</a>
+        {{ form_start(registrationForm) }}
+            <div class="form-group">
+        {{ form_label(registrationForm.email) }}
+        {{ form_widget(registrationForm.email) }}
+        {{ form_errors(registrationForm.email) }}
     </div>
+
+    <div class="form-group">
+        {{ form_label(registrationForm.plainPassword) }}
+        {{ form_widget(registrationForm.plainPassword) }}
+        {{ form_errors(registrationForm.plainPassword) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(registrationForm.nom) }}  <!-- Assurez-vous que ce champ existe -->
+        {{ form_widget(registrationForm.nom) }}
+        {{ form_errors(registrationForm.nom) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(registrationForm.prenom) }}  <!-- Assurez-vous que ce champ existe -->
+        {{ form_widget(registrationForm.prenom) }}
+        {{ form_errors(registrationForm.prenom) }}
+    </div>
+
+    <button type="submit">S'inscrire</button>
+        {{ form_end(registrationForm) }}
+
+        <div class="login-link">
+            <p>Déjà inscrit ? <a href="{{ path('app_login') }}">Connectez-vous ici</a></p>
+        </div>
 {% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        <h1 class="text-center">Contactez-nous</h1>
+
+        <div class="form-container">
+            <form action="{{ path('contact_form_submit') }}" method="POST">
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="johndoe99@example123" required>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-md-6">
+                        <label for="first_name" class="form-label">Prénom</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="John" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="last_name" class="form-label">Nom</label>
+                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Doe" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="subject" class="form-label">Sujet</label>
+                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Sujet..." required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" name="message" rows="5" placeholder="Commencez à écrire ici..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100" style="border-radius: 30px; padding: 12px 0;">Envoyer</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -36,9 +36,9 @@
             
             <!-- Barre de navigation -->
             <div class="navbar">
-                <a href="{{ path('home') }}">Mon Espace</a>
+                <a href="{{ path('app_account') }}">Mon Espace</a>
                 <a href="#">Categories</a>
-                <a href="#">Contact</a>
+                <a href="{{ path('contact_form') }}">Contact</a>
 
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <a href="{{ path('app_panier') }}">Mon Panier</a>

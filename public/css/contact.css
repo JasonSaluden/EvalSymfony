@@ -1,11 +1,12 @@
-/* Style pour la page de contact */
 body {
-    background-color: #f5a623;
+    background-color: #e4a620;
 }
 
 /* Conteneur du formulaire */
-.container {
+.form-container {
+    width: 80%;
     max-width: 600px;
+    margin: 0 auto; 
     background-color: #fff;
     padding: 40px;
     border-radius: 15px;

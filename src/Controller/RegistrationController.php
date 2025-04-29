@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Utilisateur; // N'oublie pas d'importer Utilisateur
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,61 +11,54 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class RegistrationController extends AbstractController
 {
     private $entityManager;
     private $passwordHasher;
-    private $tokenStorage;
 
     public function __construct(
         EntityManagerInterface $entityManager, 
-        UserPasswordHasherInterface $passwordHasher,
-        TokenStorageInterface $tokenStorage
+        UserPasswordHasherInterface $passwordHasher
     ) {
         $this->entityManager = $entityManager;
         $this->passwordHasher = $passwordHasher;
-        $this->tokenStorage = $tokenStorage;
     }
 
     #[Route('/register', name: 'app_register', methods: ['GET', 'POST'])]    
     public function register(Request $request): Response
     {
         $user = new User();
+        $utilisateur = new Utilisateur();
+
+        // Créer le formulaire d'inscription
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Encode le mot de passe de l'utilisateur
+            // Hacher le mot de passe avec le password hasher
             $plainPassword = $form->get('plainPassword')->getData();
             $user->setPassword($this->passwordHasher->hashPassword($user, $plainPassword));
 
-            // Ajouter un rôle par défaut
-            $user->setRoles(['ROLE_USER']);  // Changez le rôle si nécessaire
-
-            // Sauvegarde l'utilisateur en base de données
+            // Sauvegarder l'utilisateur dans la table User
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
-            // Connexion manuelle après l'inscription
-            $token = new UsernamePasswordToken(
-                $user,
-                'main', // Nom du firewall, vérifiez dans security.yaml
-                $user->getRoles()
-            );
-            $this->tokenStorage->setToken($token);
-            
-            // Stockage en session
-            $request->getSession()->set('_security_main', serialize($token));
+            // Remplir les informations supplémentaires dans la table Utilisateur
+            $utilisateur->setNom($form->get('nom')->getData());
+            $utilisateur->setPrenom($form->get('prenom')->getData());
+            $utilisateur->setDateInscription(new \DateTime());
+            $utilisateur->setUser($user); // Lier l'utilisateur au User
 
-            // Redirection vers le dashboard
-            $this->addFlash('success', 'Votre compte a été créé avec succès!');
-            return $this->redirectToRoute('app_dashboard'); // Changez selon votre route réelle
+            // Sauver les informations dans la table Utilisateur
+            $this->entityManager->persist($utilisateur);
+            $this->entityManager->flush();
+
+            // Rediriger l'utilisateur vers la page de connexion
+            return $this->redirectToRoute('app_dashboard');
         }
 
+        // Renvoyer le formulaire à la vue
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
