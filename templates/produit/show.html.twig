@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/showItem.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="product-container">
+        <h1 class="product-title">Produit</h1>
+
+        <div class="product-details">
+            <div class="product-image">
+                {% if produit.getFirstImage() %}
+                    <img src="{{ asset( produit.getFirstImage()) }}" alt="{{ produit.nomProduit  }}" class="img-fluid">
+                {% else %}
+                    <p>Aucune image disponible</p>
+                {% endif %}
+            </div>
+
+            <div class="product-info">
+                <h2>{{ produit.nomProduit  }}</h2>
+                <p>{{ produit.description }}</p>
+                <p><strong>Prix :</strong> {{ produit.prix }} €</p>
+                <p><strong>Quantité :</strong> {{ produit.quantite }}</p>
+                <p><strong>Date d'ajout :</strong> {{ produit.dateAjout ? produit.dateAjout|date('Y-m-d H:i:s') : '' }}</p>
+                <p><strong>Supprimé :</strong> {{ produit.supprime ? 'Oui' : 'Non' }}</p>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="action-buttons">
+                        <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-primary">Edit</a>
+        {{ include('produit/_delete_form.html.twig') }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="technical-specs">
+            <h3>Description</h3>
+            <p>{{ produit.description }}</p>
+        </div>
+
+         <!-- Bouton Ajouter au panier -->
+        <div class="add-to-cart">
+            <form action="{{ path('app_panier_ajouter', {'id': produit.id}) }}" method="POST">
+                <button type="submit" class="btn btn-success">Ajouter au panier</button>
+            </form>
+        </div>
+        <a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Back to list</a>
+    </div>
+{% endblock %}

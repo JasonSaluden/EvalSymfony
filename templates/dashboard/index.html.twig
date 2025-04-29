@@ -5,28 +5,34 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 {% endblock %}
-{% block body %}
 
+{% block body %}
 
 <!-- Produits en vedette -->
 <div id="featuredCarousel" class="carousel slide mt-4 mb-4" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
             <div class="product-card">
-                <img src="images/montre_luxe_1.jpg" alt="Montre Luxe">
-                <h3>Montre Luxe</h3>
+                <a href="{{ path('app_produit_show', { 'id': 7 }) }}">
+                    <img src="images/montre_luxe_1.jpg" alt="Montre Luxe">
+                    <h3>Montre Luxe</h3>
+                </a>
             </div>
         </div>
         <div class="carousel-item">
             <div class="product-card">
-                <img src="images/casque_audio_1.jpg" alt="Casque Audio">
-                <h3>Casque Audio</h3>
+                <a href="{{ path('app_produit_show', { 'id': 8 }) }}">
+                    <img src="images/casque_audio_1.jpg" alt="Casque Audio">
+                    <h3>Casque Audio</h3>
+                </a>
             </div>
         </div>
         <div class="carousel-item">
             <div class="product-card">
-                <img src="images/smartphone_x10_1.jpg" alt="Smartphone X10">
-                <h3>Smartphone X10</h3>
+                <a href="{{ path('app_produit_show', { 'id': 10 }) }}">
+                    <img src="images/smartphone_x10_1.jpg" alt="Smartphone X10">
+                    <h3>Smartphone X10</h3>
+                </a>
             </div>
         </div>
     </div>
@@ -43,40 +49,58 @@
 <!-- Section des produits en grille 3x3 -->
 <div class="dashboard-container">
     <div class="product-card">
-        <img src="images/tshirt_homme_1.jpg" alt="T-shirt Homme">
-        <h3>T-shirt Homme</h3>
+        <a href="{{ path('app_produit_show', { 'id': 9 }) }}">
+            <img src="images/tshirt_homme_1.jpg" alt="T-shirt Homme">
+            <h3>T-shirt Homme</h3>
+        </a>
     </div>
     <div class="product-card">
-        <img src="images/gel_douche_1.jpg" alt="Gel Douche">
-        <h3>Gel Douche</h3>
+        <a href="{{ path('app_produit_show', { 'id': 11 }) }}">
+            <img src="images/gel_douche_1.jpg" alt="Gel Douche">
+            <h3>Gel Douche</h3>
+        </a>
     </div>
     <div class="product-card">
-        <img src="images/power_bank_1.jpg" alt="Power Bank 10000mAh">
-        <h3>Power Bank 10000mAh</h3>
+        <a href="{{ path('app_produit_show', { 'id': 12 }) }}">
+            <img src="images/power_bank_1.jpg" alt="Power Bank 10000mAh">
+            <h3>Power Bank 10000mAh</h3>
+        </a>
     </div>
     <div class="product-card">
-        <img src="images/collier_or_1.jpg" alt="Collier en Or">
-        <h3>Collier en Or</h3>
+        <a href="{{ path('app_produit_show', { 'id': 13 }) }}">
+            <img src="images/collier_or_1.jpg" alt="Collier en Or">
+            <h3>Collier en Or</h3>
+        </a>
     </div>
     <div class="product-card">
-        <img src="images/bracelet_argent_1.jpg" alt="Bracelet en Argent">
-        <h3>Bracelet en Argent</h3>
+        <a href="{{ path('app_produit_show', { 'id': 14 }) }}">
+            <img src="images/bracelet_argent_1.jpg" alt="Bracelet en Argent">
+            <h3>Bracelet en Argent</h3>
+        </a>
     </div>
     <div class="product-card">
-        <img src="images/sac_sport_1.jpg" alt="Sac de Sport">
-        <h3>Sac de Sport</h3>
+        <a href="{{ path('app_produit_show', { 'id': 15 }) }}">
+            <img src="images/sac_sport_1.jpg" alt="Sac de Sport">
+            <h3>Sac de Sport</h3>
+        </a>
     </div>
     <div class="product-card">
-        <img src="images/gants_gym_1.jpg" alt="Gants de Gym">
-        <h3>Gants de Gym</h3>
+        <a href="{{ path('app_produit_show', { 'id': 16 }) }}">
+            <img src="images/gants_gym_1.jpg" alt="Gants de Gym">
+            <h3>Gants de Gym</h3>
+        </a>
     </div>
     <div class="product-card">
-        <img src="images/sweat_a_capuche_1.jpg" alt="Sweat à Capuche">
-        <h3>Sweat à Capuche</h3>
+        <a href="{{ path('app_produit_show', { 'id': 17 }) }}">
+            <img src="images/sweat_a_capuche_1.jpg" alt="Sweat à Capuche">
+            <h3>Sweat à Capuche</h3>
+        </a>
     </div>
     <div class="product-card">
-        <img src="images/creme_hydratante_1.jpg" alt="Crème Hydratante">
-        <h3>Crème Hydratante</h3>
+        <a href="{{ path('app_produit_show', { 'id': 18 }) }}">
+            <img src="images/creme_hydratante_1.jpg" alt="Crème Hydratante">
+            <h3>Crème Hydratante</h3>
+        </a>
     </div>
 </div>
 

@@ -18,9 +18,13 @@
         {% block javascripts %}{% endblock %}
     </head>
     <body>
-{% if app.request.attributes.get('_route') not in ['app_login', 'app_register'] %}
+        {% if app.request.attributes.get('_route') not in ['app_login', 'app_register'] %}
             <!-- Header avec logo et bouton de déconnexion ou de connexion -->
             <div class="header">
+                <a href="{% if is_granted('IS_AUTHENTICATED_FULLY') %}{{ path('app_dashboard') }}{% else %}{{ path('home') }}{% endif %}">
+                    <img src="{{ asset('images/Logo PowerCash.png') }}" alt="PowerCash Logo" class="header-logo">
+                </a>
+
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <!-- Afficher le bouton Logout si l'utilisateur est connecté -->
                     <button class="auth-btn" onclick="window.location.href='{{ path('app_logout') }}'">Logout</button>
@@ -28,7 +32,6 @@
                     <!-- Afficher le bouton Login si l'utilisateur n'est pas connecté -->
                     <button class="auth-btn" onclick="window.location.href='{{ path('app_login') }}'">Login</button>
                 {% endif %}
-                <img src="{{ asset('images/Logo PowerCash.png') }}" alt="PowerCash Logo" class="header-logo">
             </div>
             
             <!-- Barre de navigation -->
@@ -36,6 +39,16 @@
                 <a href="{{ path('home') }}">Mon Espace</a>
                 <a href="#">Categories</a>
                 <a href="#">Contact</a>
+
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a href="{{ path('app_panier') }}">Mon Panier</a>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_produit_index') }}">Produits</a>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_user_index') }}">Utilisateurs</a>
+                {% endif %}
             </div>
             
             <!-- Barre de recherche -->

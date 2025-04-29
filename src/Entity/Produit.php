@@ -166,4 +166,15 @@ class Produit
 
         return $this;
     }
+
+    // AZffiche la première image du produit
+    public function getFirstImage(): ?string
+    {
+        if (!$this->id_image->isEmpty()) {
+            $firstImage = $this->id_image->first();
+            return $firstImage->getUrl();
+        }
+
+        return null; 
+    }
 }
