@@ -1,51 +1,88 @@
 security:
-    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
-    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+
+
     providers:
-        # users_in_memory: { memory: null }
-            hwi_oauth.user.provider:
-                id: hwi_oauth.user.provider
+        hwi_oauth.user.provider:
+            id: hwi_oauth.user.provider
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
 
 
+
+    # https://symfony.com/doc/current/security.html#the-firewall
     firewalls:
-        dev:
+        dev: 
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+
+        # Main firewall
         main:
             pattern: ^/
-            oauth:
-               resource_owners:
-                   google:          "/login/check-google"
-               login_path:        /
-               use_forward:       false
-               failure_path:      /
-
-               oauth_user_provider:
-                   service: hwi_oauth.user.provider
-               provider: hwi_oauth.user.provider
             logout:
                 path: app_logout
-                target: /
+                target: /login
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                default_target_path: /dashboard
+                provider: app_user_provider
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
 
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+        # connexion locale
+        local_login:
+            pattern: ^/login$
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                default_target_path: /dashboard
+                provider: app_user_provider
+            logout:
+                path: app_logout
+                target: /login
+
+
+
+        # connexion Google
+        google_login:
+            pattern: ^/login/check-google$
+            oauth:
+                resource_owners:
+                    google: "/login/check-google"
+                login_path: /login
+                failure_path: /login
+                use_forward: false
+                default_target_path: /dashboard
+                use_referer: false
+                target_path_parameter: _target_path
+                oauth_user_provider:
+                    service: hwi_oauth.user.provider
+                provider: hwi_oauth.user.provider
+                check_path: /login/check-google
+            logout:
+                path: app_logout
+                target: /login
+
+
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/register, roles: PUBLIC_ACCESS }  
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/connect, roles: PUBLIC_ACCESS }
-        - { path: ^/(.+), roles: ROLE_USER }
         - { path: ^/$, roles: PUBLIC_ACCESS }
-        - { path: ^/dashboard, roles: ROLE_USER }
         - { path: ^/home, roles: PUBLIC_ACCESS }
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/dashboard, roles: ROLE_USER }
+        - { path: ^/(.+), roles: ROLE_USER } 
+
+
+
 
 when@test:
     security:

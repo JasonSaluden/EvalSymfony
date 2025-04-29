@@ -2,12 +2,82 @@
 
 {% block title %}Dashboard{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+{% endblock %}
 {% block body %}
-    <h1>Bienvenue sur ton dashboard</h1>
 
-    {% if user %}
-        <p>Bonjour {{ user.firstname ?? user.username }} !</p>
-    {% else %}
-        <p>Non connecté ? 🤔</p>
-    {% endif %}
+
+<!-- Produits en vedette -->
+<div id="featuredCarousel" class="carousel slide mt-4 mb-4" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="product-card">
+                <img src="images/montre_luxe_1.jpg" alt="Montre Luxe">
+                <h3>Montre Luxe</h3>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="product-card">
+                <img src="images/casque_audio_1.jpg" alt="Casque Audio">
+                <h3>Casque Audio</h3>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="product-card">
+                <img src="images/smartphone_x10_1.jpg" alt="Smartphone X10">
+                <h3>Smartphone X10</h3>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- Section des produits en grille 3x3 -->
+<div class="dashboard-container">
+    <div class="product-card">
+        <img src="images/tshirt_homme_1.jpg" alt="T-shirt Homme">
+        <h3>T-shirt Homme</h3>
+    </div>
+    <div class="product-card">
+        <img src="images/gel_douche_1.jpg" alt="Gel Douche">
+        <h3>Gel Douche</h3>
+    </div>
+    <div class="product-card">
+        <img src="images/power_bank_1.jpg" alt="Power Bank 10000mAh">
+        <h3>Power Bank 10000mAh</h3>
+    </div>
+    <div class="product-card">
+        <img src="images/collier_or_1.jpg" alt="Collier en Or">
+        <h3>Collier en Or</h3>
+    </div>
+    <div class="product-card">
+        <img src="images/bracelet_argent_1.jpg" alt="Bracelet en Argent">
+        <h3>Bracelet en Argent</h3>
+    </div>
+    <div class="product-card">
+        <img src="images/sac_sport_1.jpg" alt="Sac de Sport">
+        <h3>Sac de Sport</h3>
+    </div>
+    <div class="product-card">
+        <img src="images/gants_gym_1.jpg" alt="Gants de Gym">
+        <h3>Gants de Gym</h3>
+    </div>
+    <div class="product-card">
+        <img src="images/sweat_a_capuche_1.jpg" alt="Sweat à Capuche">
+        <h3>Sweat à Capuche</h3>
+    </div>
+    <div class="product-card">
+        <img src="images/creme_hydratante_1.jpg" alt="Crème Hydratante">
+        <h3>Crème Hydratante</h3>
+    </div>
+</div>
+
 {% endblock %}

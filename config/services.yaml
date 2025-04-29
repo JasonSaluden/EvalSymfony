@@ -6,6 +6,9 @@
 parameters:
 
 services:
+
+    # Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator: '@security.authenticator.form_login.local_login'
+    
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
@@ -20,5 +23,19 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    # Services for authenticators
+    app.authenticator.form_login:
+        class: App\Security\FormLoginAuthenticator
+        arguments:
+            - '@security.token_storage'
+            - '@security.authentication.manager'
+            - '@user_repository'
+
+    app.authenticator.oauth:
+        class: App\Security\OAuthAuthenticator
+        arguments:
+            - '@hwi_oauth.resource_owning_service'
+            - '@security.authentication.manager'
+            - '@user_repository'
+
+    # Autowiring works for all services by default, so no need to manually register basic ones
