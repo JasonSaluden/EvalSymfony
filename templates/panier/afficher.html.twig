@@ -2,55 +2,64 @@
 
 {% block title %}Mon Panier{% endblock %}
 
-{% block body %}
-    <h1>Mon Panier</h1>
-
-    {% if produits is empty %}
-        <p>Votre panier est vide.</p>
-    {% else %}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Produit</th>
-                    <th>Quantité</th>
-                    <th>Prix unitaire</th>
-                    <th>Total</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in produits %}
-                    <tr>
-                        <td>
-                            <img src="{{ asset('images/' ~ item.produit.getFirstImage()) }}" alt="{{ item.produit.nomProduit }}" class="img-fluid" style="width: 80px;">
-                            <p>{{ item.produit.nomProduit }}</p>
-                        </td>
-                        <td>
-                            <!-- Boutons pour diminuer et augmenter la quantité -->
-                            <button class="btn btn-outline-secondary" onclick="updateQuantity('{{ path('app_panier_update', {'id': item.produit.id, 'action': 'decrease'}) }}')">-</button>
-                            <span>{{ item.quantite }}</span>
-                            <button class="btn btn-outline-secondary" onclick="updateQuantity('{{ path('app_panier_update', {'id': item.produit.id, 'action': 'increase'}) }}')">+</button>
-                        </td>
-                        <td>{{ item.produit.prix }} €</td>
-                        <td>{{ item.produit.prix * item.quantite }} €</td>
-                        <td>
-                            <a href="{{ path('app_panier_remove', {'id': item.produit.id}) }}" class="btn btn-danger">Supprimer</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        <div class="total">
-            <p><strong>Total du panier : </strong>{{ total }} €</p>
-        </div>
-
-        <div>
-            <a href="{{ path('app_dashboard') }}" class="btn btn-primary">Continuer les achats</a>
-            <a href="#" class="btn btn-success">Passer à la caisse</a>
-        </div>
-    {% endif %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/panier.css') }}">
 {% endblock %}
+
+{% block header %}
+    <h1>Mon Panier</h1>
+{% endblock %}
+{% block body %}
+    <div class="container-panier">
+        <h1>Mon Panier</h1>
+
+        {% if produits is empty %}
+            <p>Votre panier est vide.</p>
+        {% else %}
+            <table class="table-panier">
+                <thead>
+                    <tr>
+                        <th>Produit</th>
+                        <th>Quantité</th>
+                        <th>Prix unitaire</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in produits %}
+                        <tr>
+                            <td>
+                                <img src="{{ asset(item.produit.getFirstImage()) }}" alt="{{ item.produit.nomProduit }}">
+                                <p>{{ item.produit.nomProduit }}</p>
+                            </td>
+                            <td>
+                                <button class="btn-modify" onclick="updateQuantity('{{ path('app_panier_update', {'id': item.produit.id, 'action': 'decrease'}) }}')">-</button>
+                                <input type="number" name="quantites[{{ item.produit.id }}]" value="{{ item.quantite }}" class="input-quantite" min="1">
+                                <button class="btn-modify" onclick="updateQuantity('{{ path('app_panier_update', {'id': item.produit.id, 'action': 'increase'}) }}')">+</button>
+                            </td>
+                            <td>{{ item.produit.prix }} €</td>
+                            <td>{{ item.produit.prix * item.quantite }} €</td>
+                            <td>
+                                <a href="{{ path('app_panier_remove', {'id': item.produit.id}) }}" class="btn-supprimer">X</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="total-panier">
+                <p><strong>Total du panier : </strong>{{ total }} €</p>
+            </div>
+
+            <div class="bottom-buttons">
+                <a href="{{ path('app_dashboard') }}" class="btn-continuer">Continuer les achats</a>
+                <a href="#" class="btn-payer">Passer à la caisse</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
 
 {% block javascripts %}
     <script src="{{ asset('js/panier.js') }}"></script>

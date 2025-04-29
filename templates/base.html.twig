@@ -51,10 +51,12 @@
                 {% endif %}
             </div>
             
-            <!-- Barre de recherche -->
-            <div class="search-container">
-                <input type="text" placeholder="Rechercher un produit..." class="search-bar">
-            </div>
+             <!-- Barre de recherche, visible seulement sur /home ou /dashboard -->
+            {% if app.request.getRequestUri() == path('home') or app.request.getRequestUri() == path('app_dashboard') %}
+                <div class="search-container">
+                    <input type="text" placeholder="Rechercher un produit..." class="search-bar">
+                </div>
+            {% endif %}
         {% endif %}
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>

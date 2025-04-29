@@ -73,7 +73,7 @@ class PanierController extends AbstractController
         ]);
     }
 
-    #[Route('/panier/diminuer/{id}', name: 'app_panier_ajouter')]
+    #[Route('/panier/diminuer/{id}', name: 'app_panier_diminuer')]
     public function diminuerQuantite(int $id, Request $request)
     {
         $produit = $this->entityManager->getRepository(Produit::class)->find($id);
@@ -124,4 +124,5 @@ class PanierController extends AbstractController
 
         return $this->redirectToRoute('app_panier');
     }
+
 }
