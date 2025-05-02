@@ -8,7 +8,7 @@
 
 {% block body %}
 
-<!-- Produits en vedette -->
+{# Carrousel #}
 <div id="featuredCarousel" class="carousel slide mt-4 mb-4" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
@@ -46,7 +46,7 @@
     </button>
 </div>
 
-<!-- Section des produits en grille 3x3 -->
+{# Autres produits #}
 <div class="dashboard-container">
     <div class="product-card">
         <a href="{{ path('app_produit_show', { 'id': 9 }) }}">

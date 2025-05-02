@@ -20,33 +20,17 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-
         # Main firewall
         main:
             pattern: ^/
-            logout:
-                path: app_logout
-                target: /login
+            provider: app_user_provider
             form_login:
                 login_path: app_login
                 check_path: app_login
                 default_target_path: /dashboard
-                provider: app_user_provider
-
-
-        # connexion locale
-        local_login:
-            pattern: ^/login$
-            form_login:
-                login_path: app_login
-                check_path: app_login
-                default_target_path: /dashboard
-                provider: app_user_provider
             logout:
                 path: app_logout
                 target: /login
-
-
 
         # connexion Google
         google_login:
@@ -73,12 +57,19 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+    # Sans authentification
         - { path: ^/register, roles: PUBLIC_ACCESS }  
         - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/connect, roles: PUBLIC_ACCESS }
         - { path: ^/$, roles: PUBLIC_ACCESS }
         - { path: ^/home, roles: PUBLIC_ACCESS }
-        - { path: ^/dashboard, roles: ROLE_USER }
+    # Avec authentification
+        - { path: ^/dashboard, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/panier, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/produit, roles: [ROLE_USER, ROLE_ADMIN] }
+        - { path: ^/produit/categorie, roles: [ROLE_USER, ROLE_ADMIN] }
+
+        - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/(.+), roles: ROLE_USER } 
 
 

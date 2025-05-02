@@ -18,9 +18,6 @@ class Categorie
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    /**
-     * @var Collection<int, Produit>
-     */
     #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'id_categorie')]
     private Collection $id_produit;
 
@@ -46,9 +43,6 @@ class Categorie
         return $this;
     }
 
-    /**
-     * @return Collection<int, Produit>
-     */
     public function getIdProduit(): Collection
     {
         return $this->id_produit;
@@ -67,7 +61,6 @@ class Categorie
     public function removeIdProduit(Produit $idProduit): static
     {
         if ($this->id_produit->removeElement($idProduit)) {
-            // set the owning side to null (unless already changed)
             if ($idProduit->getIdCategorie() === $this) {
                 $idProduit->setIdCategorie(null);
             }

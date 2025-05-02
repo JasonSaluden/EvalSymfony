@@ -10,6 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UtilisateurType extends AbstractType
 {
+    // Création du formulaire pour l'utilisateur
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

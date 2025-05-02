@@ -18,7 +18,6 @@ final class ContactController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-
     #[Route('/contact', name: 'contact_form')]
     public function index(): Response
     {
@@ -32,11 +31,11 @@ final class ContactController extends AbstractController
             'nom' => ''
         ];
 
-        // Si l'utilisateur est connecté, récupérer ses informations
+        // Si l'utilisateur est connecté, on récup ses infos
         if ($user) {
             $userData['email'] = $user->getEmail();
 
-            // Récupérer l'entité Utilisateur associée
+            // Liaison infos Utilisateur associé
             $utilisateur = $user->getUtilisateur();
 
             if ($utilisateur) {
@@ -44,13 +43,14 @@ final class ContactController extends AbstractController
                 $userData['nom'] = $utilisateur->getNom() ?: '';
             }
         }
-
+        // Récupérer les messages de contact
         return $this->render('contact/index.html.twig', [
             'controller_name' => 'ContactController',
             'userData' => $userData
         ]);
     }
 
+    // Soumettre le formulaire de contact
     #[Route('/contact/submit', name: 'contact_form_submit')]
     public function submitContactForm(Request $request): Response
     {
@@ -64,7 +64,7 @@ final class ContactController extends AbstractController
         // Créer une nouvelle instance de MessageContact
         $messageContact = new MessageContact();
         $messageContact->setEmail($email);
-        $messageContact->setNom("$firstName $lastName"); // Ou vous pouvez stocker prénom et nom séparément selon votre schéma
+        $messageContact->setNom("$firstName $lastName"); // On concatène le prénom et le nom
         $messageContact->setSujet($subject);
         $messageContact->setMessage($messageText);
         // La date d'envoi est déjà initialisée dans le constructeur
@@ -79,10 +79,10 @@ final class ContactController extends AbstractController
         $this->entityManager->persist($messageContact);
         $this->entityManager->flush();
 
-        // Ajouter un message flash de confirmation
-        $this->addFlash('success', 'Votre message a été envoyé avec succès. Nous vous répondrons dans les plus brefs délais.');
+        // Message de confirmation
+        $this->addFlash('success', 'Votre message a été envoyé avec succès !');
 
-        // Rediriger vers la page de contact
+        // Redirection vers la page de contact
         return $this->redirectToRoute('contact_form');
     }
 }

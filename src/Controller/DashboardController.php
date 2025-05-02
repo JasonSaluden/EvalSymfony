@@ -9,8 +9,8 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class DashboardController extends AbstractController
 {
+    // Affiche le tableau de bord, pour tous les utilisateurs connectés
     #[Route('/dashboard', name: 'app_dashboard')]
-    // #[IsGranted('ROLE_ADMIN')]
     public function index(): Response
     {
         return $this->render('dashboard/index.html.twig', [

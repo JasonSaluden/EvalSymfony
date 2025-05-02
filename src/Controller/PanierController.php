@@ -18,14 +18,16 @@ class PanierController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    // Ajouter un produit au panier
+    // Ajout d'un produit au panier
     #[Route('/panier/ajouter/{id}', name: 'app_panier_ajouter', methods: ['POST'])]
     public function ajouterAuPanier(int $id, Request $request)
     {
+        // Récupérer le produit à partir de l'Id
         $produit = $this->entityManager->getRepository(Produit::class)->find($id);
 
         if ($produit) {
             $session = $request->getSession();
+            // Vérifier si le panier existe déjà dans la session, sinon l'initialiser
             $cart = $session->get('panier', []);
 
             $cart[$id] = isset($cart[$id]) ? $cart[$id] + 1 : 1;
@@ -44,9 +46,6 @@ class PanierController extends AbstractController
         // Récupérer le panier stocké dasn  la session
         $session = $request->getSession();
         $cart = $session->get('panier', []);
-
-
-
 
         // liste des produits dans le panier
         $produits = [];
@@ -73,6 +72,7 @@ class PanierController extends AbstractController
         ]);
     }
 
+    // Retrait produit du panier
     #[Route('/panier/diminuer/{id}', name: 'app_panier_diminuer')]
     public function diminuerQuantite(int $id, Request $request)
     {
@@ -124,5 +124,4 @@ class PanierController extends AbstractController
 
         return $this->redirectToRoute('app_panier');
     }
-
 }

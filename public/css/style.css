@@ -4,7 +4,11 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* Header styles */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .header {
     background-color: #e4a620;
     padding: 10px 0;
@@ -17,22 +21,31 @@ body {
     display: block;
 }
 
-/* Navigation bar styles */
 .navbar {
-    background-color: #2e7d32; /* Vert foncé comme sur votre maquette */
+    background-color: #2e7d32; 
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 10px 0;
 }
 
 .navbar a {
-    color: white;
     text-decoration: none;
     padding: 0 20px;
     font-weight: bold;
 }
 
-/* Search bar styles */
+.categoryName {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 0 20px;
+    font-weight: bold;
+}
+
+.categoryName:hover {
+    color: #e4a620; 
+}
+
 .search-container {
     background-color: #e4a620;
     padding: 10px 0;
@@ -46,7 +59,6 @@ body {
     border: none;
 }
 
-/* Logout/Login button */
 .auth-btn {
     position: absolute;
     top: 10px;
@@ -57,3 +69,39 @@ body {
     padding: 5px 15px;
     cursor: pointer;
 }
+
+
+.btn-secondary {
+    background-color: #2e7d32;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color:#2e7d32; 
+}
+
+.btn-secondary:active {
+    background-color:#2e7d32; 
+}
+
+.btn-secondary:focus {
+    background-color:#2e7d32; 
+}
+
+.dropdown-menu {
+    background-color: #fff;
+  }
+  
+  .dropdown-item {
+    color: #333; 
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #000; 
+  }
+
+  .user-roles {
+    display: flex;
+    opacity: 50%;
+  }

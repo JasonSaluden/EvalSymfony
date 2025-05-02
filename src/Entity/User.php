@@ -27,6 +27,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    private $adminRole;
+
     #[ORM\OneToOne(targetEntity: Utilisateur::class, mappedBy: 'user', cascade: ['persist'])]
     private ?Utilisateur $utilisateur = null;
 
@@ -94,6 +96,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return (string) $this->email;  
+    }
+
+    public function getAdminRole(): ?bool
+    {
+        return $this->adminRole;
+    }
+
+    public function setAdminRole(bool $adminRole): self
+    {
+        $this->adminRole = $adminRole;
+
+        return $this;
     }
 
 }

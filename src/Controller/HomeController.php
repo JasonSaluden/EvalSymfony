@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Security;
 
 final class HomeController extends AbstractController
 {
+    // Affiche la page d'accueil, pour tous les utilisateurs non connectés
     #[Route('/home', name: 'home')]
     public function index(): Response
     {

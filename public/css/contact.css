@@ -2,7 +2,6 @@ body {
     background-color: #e4a620;
 }
 
-/* Conteneur du formulaire */
 .form-container {
     width: 80%;
     max-width: 600px;
@@ -13,20 +12,17 @@ body {
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Titre du formulaire */
 h2 {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
 }
 
-/* Étiquettes des champs */
 .form-label {
     color: #333;
     font-size: 16px;
 }
 
-/* Champs du formulaire */
 .form-control {
     border-radius: 10px;
     box-shadow: none;
@@ -38,7 +34,6 @@ h2 {
     box-shadow: 0 0 5px rgba(245, 166, 35, 0.5);
 }
 
-/* Bouton d'envoi */
 button[type="submit"] {
     background-color: #28a745;
     color: white;
@@ -53,24 +48,20 @@ button[type="submit"]:hover {
     background-color: #218838;
 }
 
-/* Espacement entre les champs */
 .mb-3 {
     margin-bottom: 20px;
 }
 
-/* Zone de texte (message) */
 textarea.form-control {
     resize: none;
     font-size: 14px;
 }
 
-/* Champs de texte et de message */
 input.form-control, textarea.form-control {
     font-size: 16px;
     padding: 10px;
 }
 
-/* Centrage du bouton */
 .w-100 {
     width: 100%;
 }

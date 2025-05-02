@@ -2,14 +2,12 @@ body {
     background-color: #e4a620; /* Orange */
 }
 
-/* Centrer le carrousel */
 .carousel {
     margin: 0 auto;
     max-width: 80%;
     width: 100%;
 }
 
-/* Correction du centrage du carrousel */
 #featuredCarousel {
     position: relative;
     overflow: hidden;
@@ -19,12 +17,6 @@ body {
     width: 100%;
 }
 
-.carousel-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
 
 .carousel-item img {
     width: 100%;
@@ -32,42 +24,52 @@ body {
     object-fit: cover;
 }
 
+.carousel-control-prev,
+.carousel-control-next {
+    width: 10%;
+    border-radius: 5px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1);
+}
+
 .product-card {
-background-color: white;
-border-radius: 10px;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-overflow: hidden;
-text-align: center;
-padding: 10px;
-width: 250px;
-height: 250px;
-margin: 10px auto;
-display: flex;
-flex-direction: column;
-justify-content: space-between; /* Espaces égaux entre l'image et le texte */
-align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    padding: 10px;
+    width: 250px;
+    height: 250px;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espaces égaux entre l'image et le texte */
+    align-items: center;
 }
 
 .product-card img {
-width: auto;
-height: 19vh;
-object-fit: cover;
-border-radius: 8px;
-margin-bottom: 10px; /* Ajoute un espacement entre l'image et le texte */
+    width: auto;
+    height: 19vh;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px; /* Ajoute un espacement entre l'image et le texte */
 }
 
 .product-card h3 {
-margin-top: 10px;
-font-size: 1.2em;
-color: #333;
-overflow: hidden;
-text-overflow: ellipsis; /* Si le texte est trop long, il sera coupé avec des "..." */
-white-space: nowrap; /* Empêche le texte de passer à la ligne suivante */
-display: block;
-width: 100%; /* Garantir que le texte s'ajuste à la largeur du container */
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Si le texte est trop long, il sera coupé avec des "..." */
+    white-space: nowrap; /* Empêche le texte de passer à la ligne suivante */
+    display: block;
+    width: 100%; /* Garantir que le texte s'ajuste à la largeur du container */
 }
 
-/* Section des produits en grille 3x3 */
 .dashboard-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

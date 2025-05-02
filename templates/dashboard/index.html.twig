@@ -2,37 +2,49 @@
 
 {% block title %}Dashboard{% endblock %}
 
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 {% endblock %}
 
 {% block body %}
 
-<!-- Produits en vedette -->
+{# Carrousel #}
 <div id="featuredCarousel" class="carousel slide mt-4 mb-4" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <div class="product-card">
-                <a href="{{ path('app_produit_show', { 'id': 7 }) }}">
-                    <img src="images/montre_luxe_1.jpg" alt="Montre Luxe">
-                    <h3>Montre Luxe</h3>
-                </a>
+            <div class="d-flex justify-content-center">
+                <div class="product-card">
+                    <a href="{{ path('app_produit_show', { 'id': 7 }) }}">
+                        <img src="images/montre_luxe_1.jpg" alt="Montre Luxe">
+                        <h3>Montre Luxe</h3>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="carousel-item">
-            <div class="product-card">
-                <a href="{{ path('app_produit_show', { 'id': 8 }) }}">
-                    <img src="images/casque_audio_1.jpg" alt="Casque Audio">
-                    <h3>Casque Audio</h3>
-                </a>
+            <div class="d-flex justify-content-center">
+                <div class="product-card">
+                    <a href="{{ path('app_produit_show', { 'id': 8 }) }}">
+                        <img src="images/casque_audio_1.jpg" alt="Casque Audio">
+                        <h3>Casque Audio</h3>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="carousel-item">
-            <div class="product-card">
-                <a href="{{ path('app_produit_show', { 'id': 10 }) }}">
-                    <img src="images/smartphone_x10_1.jpg" alt="Smartphone X10">
-                    <h3>Smartphone X10</h3>
-                </a>
+            <div class="d-flex justify-content-center">
+                <div class="product-card">
+                    <a href="{{ path('app_produit_show', { 'id': 10 }) }}">
+                        <img src="images/smartphone_x10_1.jpg" alt="Smartphone X10">
+                        <h3>Smartphone X10</h3>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -46,7 +58,7 @@
     </button>
 </div>
 
-<!-- Section des produits en grille 3x3 -->
+{# Autres produits #}
 <div class="dashboard-container">
     <div class="product-card">
         <a href="{{ path('app_produit_show', { 'id': 9 }) }}">
@@ -60,6 +72,7 @@
             <h3>Gel Douche</h3>
         </a>
     </div>
+
     <div class="product-card">
         <a href="{{ path('app_produit_show', { 'id': 12 }) }}">
             <img src="images/power_bank_1.jpg" alt="Power Bank 10000mAh">

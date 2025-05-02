@@ -37,9 +37,6 @@ class Produit
     #[ORM\ManyToOne(inversedBy: 'id_produit')]
     private ?Categorie $id_categorie = null;
 
-    /**
-     * @var Collection<int, Image>
-     */
     #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'id_produit')]
     private Collection $id_image;
 
@@ -137,9 +134,6 @@ class Produit
         return $this;
     }
 
-    /**
-     * @return Collection<int, Image>
-     */
     public function getIdImage(): Collection
     {
         return $this->id_image;
@@ -167,7 +161,7 @@ class Produit
         return $this;
     }
 
-    // AZffiche la première image du produit
+    // Affiche la première image du produit
     public function getFirstImage(): ?string
     {
         if (!$this->id_image->isEmpty()) {

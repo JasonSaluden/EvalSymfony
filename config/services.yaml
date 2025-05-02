@@ -6,9 +6,6 @@
 parameters:
 
 services:
-
-    # Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator: '@security.authenticator.form_login.local_login'
-    
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.

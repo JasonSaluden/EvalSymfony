@@ -25,33 +25,59 @@
                     <img src="{{ asset('images/Logo PowerCash.png') }}" alt="PowerCash Logo" class="header-logo">
                 </a>
 
+                {# Afficher le bouton Logout si l'utilisateur est connecté #}
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <!-- Afficher le bouton Logout si l'utilisateur est connecté -->
                     <button class="auth-btn" onclick="window.location.href='{{ path('app_logout') }}'">Logout</button>
+                {# Affiche le role (debug) #}
+                    <div class="user-roles">
+                        <p>Rôle utilisateur connecté : {{ app.user.roles | join(', ') }}</p>
+                    </div>
+                {# Sinon bouton pour se co #}
                 {% else %}
-                    <!-- Afficher le bouton Login si l'utilisateur n'est pas connecté -->
                     <button class="auth-btn" onclick="window.location.href='{{ path('app_login') }}'">Login</button>
                 {% endif %}
             </div>
+
             
-            <!-- Barre de navigation -->
+            {# Barre de navigation #}
             <div class="navbar">
-                <a href="{{ path('app_account') }}">Mon Espace</a>
-                <a href="#">Categories</a>
-                <a href="{{ path('contact_form') }}">Contact</a>
+
+                {% if is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN') %}
+                    <a class="categoryName" href="{{ path('app_account') }}">Mon Espace</a>
+                {% endif %}
+                
+                <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle categoryName" type="button" id="dropdownCategories" data-bs-toggle="dropdown" aria-expanded="false">
+                        Categories
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownCategories">
+                        <li><a class="dropdown-item" href="{{ path('app_produit_by_categorie', {'id': 1}) }}">Montres</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_produit_by_categorie', {'id': 2}) }}">Casques audio</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_produit_by_categorie', {'id': 3}) }}">Vêtements</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_produit_by_categorie', {'id': 4}) }}">Soins personnels</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_produit_by_categorie', {'id': 5}) }}">Accessoires électroniques</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_produit_by_categorie', {'id': 6}) }}">Bijoux</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_produit_by_categorie', {'id': 7}) }}">Accessoires sport</a></li>
+                    </ul>
+                </div>
+
+                {% if is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN') %}
+                    <a class="categoryName" href="{{ path('contact_form') }}">Contact</a>
+                {% endif %}
+
 
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <a href="{{ path('app_panier') }}">Mon Panier</a>
+                    <a class="categoryName" href="{{ path('app_panier') }}">Mon Panier</a>
                 {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('app_produit_index') }}">Produits</a>
+                    <a class="categoryName" href="{{ path('app_produit_index') }}">Gestion Produits</a>
                 {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('app_user_index') }}">Utilisateurs</a>
+                    <a class="categoryName" href="{{ path('app_user_index') }}">Gestion Utilisateurs</a>
                 {% endif %}
             </div>
             
-             <!-- Barre de recherche, visible seulement sur /home ou /dashboard -->
+            {# Barre de recherceh que sur home et dashboard, à rendre fonctionnelle #}
             {% if app.request.getRequestUri() == path('home') or app.request.getRequestUri() == path('app_dashboard') %}
                 <div class="search-container">
                     <input type="text" placeholder="Rechercher un produit..." class="search-bar">

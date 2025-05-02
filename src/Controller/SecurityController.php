@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class SecurityController extends AbstractController
 {
+    // Affiche la page de connexion
     #[Route('/login', name: 'app_login')]
     public function login(): Response
     {
@@ -18,6 +19,7 @@ final class SecurityController extends AbstractController
         return $this->render('security/login.html.twig');
     }
 
+    // Déconnection de l'utilisateur
     #[Route('/logout', name: 'app_logout')]
     public function logout(): void
     {

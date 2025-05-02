@@ -3,7 +3,7 @@ body {
 
 }
 
-.container-panier {
+.container-users {
     width: 90%;
     max-width: 1200px;
     margin: 40px auto;
@@ -14,18 +14,11 @@ body {
     overflow: hidden;
 }
 
-.container-panier h1 {
-    text-align: center;
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 20px;
-}
-
 .table-panier {
     width: 100%;
     margin-bottom: 20px;
     border-collapse: collapse;
-    border-radius: 10px 10px 0 0; 
+    border-radius: 10px 10px 0 0;
     overflow: hidden;
 }
 
@@ -45,64 +38,7 @@ body {
 .table-panier td {
     padding: 15px;
     text-align: center;
-    border-bottom: 1px solid #ddd;}
-
-.table-panier td img {
-    max-width: 80px;
-    border-radius: 5px;
-}
-
-.input-quantite {
-    width: 60px;
-    padding: 5px;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.input-quantite:focus {
-    outline: none;
-    border-color: #ff9900;
-}
-
-.btn-modify {
-    background-color: #ffcc00;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 18px;
-    transition: background-color 0.3s;
-}
-
-.btn-modify:hover {
-    background-color: #ff9900;
-}
-
-.btn-continuer {
-    text-decoration: none !important;
-}
-
-.btn-payer {
-    text-decoration: none !important;
-}
-
-.btn-supprimer {
-    background-color: #e74c3c;
-    color: white;
-    border-radius: 50%;
-    padding: 10px 15px;
-    font-size: 18px;
-    text-decoration: none;
-    text-align: center;
-    cursor: pointer;
-}
-
-.btn-supprimer:hover {
-    background-color: #c0392b;
-    color: white;
-
+    border-bottom: 1px solid #ddd;
 }
 
 .total-panier {
@@ -117,6 +53,20 @@ body {
 
 .total-panier strong {
     color: #333;
+}
+
+.btn-modify {
+    background-color: #ffcc00;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.btn-modify:hover {
+    background-color: #ff9900;
 }
 
 .bottom-buttons {
@@ -145,4 +95,15 @@ body {
 
 .bottom-buttons a:hover, .bottom-buttons button:hover {
     opacity: 0.8;
+}
+
+.btn-continuer {
+    background-color: #2E7D32;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
 }

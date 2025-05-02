@@ -20,14 +20,12 @@ body {
     font-size: 24px;
 }
 
-/* Conteneur de produit */
 .product-details {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
 
-/* Image */
 .product-image img {
     max-width: 100%;
     height: auto;
@@ -36,7 +34,6 @@ body {
     max-height: 400px;
 }
 
-/* Informations produit */
 .product-info {
     width: 60%;
 }
@@ -51,7 +48,6 @@ body {
     line-height: 1.6;
 }
 
-/* Boutons */
 .action-buttons a {
     text-decoration: none;
     padding: 10px 20px;
@@ -68,7 +64,6 @@ body {
     background-color: #28a745;
 }
 
-/* Section Caractéristiques techniques */
 .technical-specs {
     margin-top: 30px;
     padding: 20px;

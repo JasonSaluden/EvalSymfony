@@ -1,0 +1,44 @@
+body {
+    background-color: #e4a620;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.login-container {
+    background-color: #e6ddce;
+    border: 4px solid red;
+    border-radius: 25px;
+    width: 400px;
+    margin: 80px auto;
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.login-container h2 {
+    margin-bottom: 30px;
+    font-size: 24px;
+
+}
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+button {
+    background-color: #3c9c3c;
+    color: yellow;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.google-login {
+    margin-top: 20px;
+}
+.btn-no-login {
+    margin-top: 1vh;
+}

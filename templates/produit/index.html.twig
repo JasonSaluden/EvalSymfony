@@ -1,45 +1,67 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produit index{% endblock %}
+{% block title %}Liste des produits{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/products.css') }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Produit index</h1>
+    <div class="container-products container-panier">
+        <h1>Liste des produits</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom_produit</th>
-                <th>Description</th>
-                <th>Prix</th>
-                <th>Quantite</th>
-                <th>Date_ajout</th>
-                <th>Supprime</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for produit in produits %}
-            <tr>
-                <td>{{ produit.id }}</td>
-                <td>{{ produit.nomProduit }}</td>
-                <td>{{ produit.description }}</td>
-                <td>{{ produit.prix }}</td>
-                <td>{{ produit.quantite }}</td>
-                <td>{{ produit.dateAjout ? produit.dateAjout|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ produit.supprime ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
-                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <table class="table-panier">
+            <thead>
+                <tr>
+                    <th> </th>
+                    <th>ID</th>
+                    <th>Nom du produit</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Date d'ajout</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for produit in produits %}
+                <tr>
+                    <td>
+                        {% if produit.getFirstImage() %}
+                            <img src="{{ asset(produit.getFirstImage()) }}" alt="{{ produit.nomProduit }}" class="product-image">
+                        {% else %}
+                            <img src="{{ asset('images/default-product.png') }}" alt="Image par défaut" class="product-image">
+                        {% endif %}
+                    </td>
+                    <td>{{ produit.id }}</td>
+                    <td>{{ produit.nomProduit }}</td>
+                    <td class="description" >{{ produit.description }}</td>
+                    <td>{{ produit.prix }} €</td>
+                    <td>{{ produit.quantite }}</td>
+                    <td>{{ produit.dateAjout ? produit.dateAjout|date('Y-m-d') : '' }}</td>
+                    <td>
+                        <div class="actions-buttons">
+                            <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn-modify">Voir</a>
+                            <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn-modify">Modifier</a>
+                        </div>
+                    </td>
 
-    <a href="{{ path('app_produit_new') }}">Create new</a>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">Aucun produit trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="actions">
+            <div class="total-panier">
+                <a href="{{ path('app_produit_new') }}" class="btn-success">Créer un nouveau produit</a>
+            </div>
+
+            <div class="bottom-buttons">
+                <a href="{{ path('app_dashboard') }}" class="btn-continuer">Retour au tableau de bord</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

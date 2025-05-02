@@ -1,7 +1,7 @@
 
 // Fonction pour augmenter ou diminuer la quantité d'un produit dans le panier
+// Pas top car on recharge la page entière à chaque fois
  
-// panier.js
 function updateQuantity(url) {
     fetch(url, {
         method: 'GET', 

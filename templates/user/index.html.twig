@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/users.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container-users container-panier">
+        <h1>Liste des utilisateurs</h1>
+
+        <table class="table-panier">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Rôles</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Date d'inscription</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    <td>{{ user.utilisateur.nom }}</td>
+                    <td>{{ user.utilisateur.prenom }}</td>
+                    <td>{{ user.utilisateur.dateInscription ? user.utilisateur.dateInscription|date('Y-m-d') : '' }}</td>
+                    <td>
+                        <a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn-modify">Voir</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Aucun utilisateur trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="total-panier">
+            <a href="{{ path('app_dashboard') }}" class="btn-continuer">Retour au tableau de bord</a>
+        </div>
+    </div>
+{% endblock %}

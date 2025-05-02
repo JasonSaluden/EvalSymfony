@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits par catégorie{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/showItem.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Produits de la catégorie {{ categorie.getNom()}}</h1>
+
+        {% if produits is empty %}
+            <p>Aucun produit n'est disponible dans cette catégorie.</p>
+        {% else %}
+            <div class="row">
+                {% for produit in produits %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                        
+                            {% if produit.getFirstImage() %}
+                                <img src="{{ asset( produit.getFirstImage()) }}" class="card-img-top" alt="{{ produit.getNomProduit() }}">
+                            {% else %}
+                                <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="{{ produit.getNomProduit() }}">
+                            {% endif %}            
+
+                            <div class="card-body">
+                                <h5 class="card-title">{{ produit.getNomProduit() }}</h5>
+                                <p class="card-text">{{ produit.getDescription() }}</p>
+                                <p class="card-text"><strong>Prix: </strong>{{ produit.getPrix() }} €</p>
+                                <a href="{{ path('app_produit_show', {'id': produit.getId()}) }}" class="btn btn-primary">Voir détails</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <a href="{{ path('home') }}" class="btn btn-secondary mt-3">Retour à l'accueil</a>
+    </div>
+{% endblock %}
