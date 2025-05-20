@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits supprimés{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/deletedProducts.css') }}">
+{% endblock %}
+
+
+{% block body %}
+    <div class="container-products container-panier">
+        <h1>Produits supprimés</h1>
+
+        <table class="table-panier">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Date d'ajout</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for produit in produits %}
+                <tr>
+                    <td>{{ produit.id }}</td>
+                    <td>{{ produit.nomProduit }}</td>
+                    <td>{{ produit.description }}</td>
+                    <td>{{ produit.prix }} €</td>
+                    <td>{{ produit.dateAjout ? produit.dateAjout|date('Y-m-d') : '' }}</td>
+                    <td>
+                        <form method="post" action="{{ path('app_produit_restore', {'id': produit.id}) }}" style="display:inline;" onsubmit="return confirm('Sûr de restaurer ce produit ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('restore' ~ produit.id) }}">
+                            <button class="btn btn-success">Restaurer</button>
+                        </form>
+
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Aucun produit supprimé.</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_produit_index') }}" class="btn btn-secondary">Retour</a>
+    </div>
+{% endblock %}

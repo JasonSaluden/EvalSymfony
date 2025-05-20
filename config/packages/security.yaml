@@ -24,17 +24,12 @@ security:
         main:
             pattern: ^/
             provider: app_user_provider
+            entry_point: form_login
             form_login:
                 login_path: app_login
                 check_path: app_login
+                enable_csrf: true
                 default_target_path: /dashboard
-            logout:
-                path: app_logout
-                target: /login
-
-        # connexion Google
-        google_login:
-            pattern: ^/login/check-google$
             oauth:
                 resource_owners:
                     google: "/login/check-google"
@@ -51,6 +46,10 @@ security:
             logout:
                 path: app_logout
                 target: /login
+
+        # connexion Google
+        # google_login:
+        #     pattern: ^/login/check-google$
 
 
 

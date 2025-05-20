@@ -24,30 +24,26 @@
                 <a href="{% if is_granted('IS_AUTHENTICATED_FULLY') %}{{ path('app_dashboard') }}{% else %}{{ path('home') }}{% endif %}">
                     <img src="{{ asset('images/Logo PowerCash.png') }}" alt="PowerCash Logo" class="header-logo">
                 </a>
+            </div>
 
-                {# Afficher le bouton Logout si l'utilisateur est connecté #}
+
+            {# Barre de navigation #}
+            <div class="navbar">
+
+            {# Afficher le bouton Logout si l'utilisateur est connecté #}
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <button class="auth-btn" onclick="window.location.href='{{ path('app_logout') }}'">Logout</button>
-                {# Affiche le role (debug) #}
-                    <div class="user-roles">
-                        <p>Rôle utilisateur connecté : {{ app.user.roles | join(', ') }}</p>
-                    </div>
                 {# Sinon bouton pour se co #}
                 {% else %}
                     <button class="auth-btn" onclick="window.location.href='{{ path('app_login') }}'">Login</button>
                 {% endif %}
-            </div>
-
-            
-            {# Barre de navigation #}
-            <div class="navbar">
 
                 {% if is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN') %}
                     <a class="categoryName" href="{{ path('app_account') }}">Mon Espace</a>
                 {% endif %}
                 
                 <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle categoryName" type="button" id="dropdownCategories" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle categoryName" type="button" id="dropdownCategories" data-bs-toggle="dropdown" aria-expanded="false">
                         Categories
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownCategories">
@@ -77,16 +73,23 @@
                 {% endif %}
             </div>
             
-            {# Barre de recherceh que sur home et dashboard, à rendre fonctionnelle #}
+            {# Barre de recherche que sur home et dashboard, à rendre fonctionnelle #}
             {% if app.request.getRequestUri() == path('home') or app.request.getRequestUri() == path('app_dashboard') %}
                 <div class="search-container">
-                    <input type="text" placeholder="Rechercher un produit..." class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Rechercher un produit..." class="search-bar">
+                    <button class="search-btn btn-success" onclick="window.location.href='{{ path('app_produit_search') }}?query=' + encodeURIComponent(document.getElementById('searchInput').value)">Rechercher</button>
                 </div>
             {% endif %}
         {% endif %}
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>
-        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ asset('js/searchBar.js') }}"></script>
+
+        {# Contenu principal de la page #}
+        {% block content %}
+        {% endblock %}
+
+        {# Footer #}
         {% block body %}{% endblock %}
     </body>
 </html>

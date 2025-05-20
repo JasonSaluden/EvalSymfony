@@ -1,5 +1,5 @@
 body {
-    background-color: #e4a620; /* Orange */
+    background-color: #f3c773;
 }
 
 .carousel {
@@ -15,8 +15,13 @@ body {
 
 .carousel-inner {
     width: 100%;
+    height: 34vh;
 }
 
+.carousel-item {
+    min-height: 300px; 
+    transition: opacity 1s ease-in-out;
+}
 
 .carousel-item img {
     width: 100%;
@@ -42,21 +47,21 @@ body {
     overflow: hidden;
     text-align: center;
     padding: 10px;
-    width: 250px;
-    height: 250px;
+    width: 15vw;
+    height: 30vh;
     margin: 10px auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Espaces égaux entre l'image et le texte */
+    justify-content: space-between; 
     align-items: center;
 }
 
 .product-card img {
     width: auto;
-    height: 19vh;
+    height: 23vh;
     object-fit: cover;
     border-radius: 8px;
-    margin-bottom: 10px; /* Ajoute un espacement entre l'image et le texte */
+    margin-bottom: 10px; 
 }
 
 .product-card h3 {
@@ -64,10 +69,10 @@ body {
     font-size: 1.2em;
     color: #333;
     overflow: hidden;
-    text-overflow: ellipsis; /* Si le texte est trop long, il sera coupé avec des "..." */
-    white-space: nowrap; /* Empêche le texte de passer à la ligne suivante */
+    text-overflow: ellipsis; 
+    white-space: nowrap;
     display: block;
-    width: 100%; /* Garantir que le texte s'ajuste à la largeur du container */
+    width: 100%; 
 }
 
 .dashboard-container {
@@ -79,6 +84,40 @@ body {
     margin: 0 auto;
     justify-items: center;
 }
+
+h1.promotions {
+    font-size: 3rem;
+    color: #fff;
+    background: linear-gradient(90deg, #ff4e50, #f9d423);
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(249, 212, 35, 0.7);
+    display: inline-block;
+    animation: flash 1.5s infinite alternate;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+
+}
+
+@keyframes flash {
+    from { opacity: 1; }
+    to { opacity: 0.75; }
+}
+
+h1.popular {
+    font-size: 2.5rem;
+    color: #333;
+    border-bottom: 3px solid #ff0000;
+    padding-bottom: 10px;
+    display: inline-block;
+    border-bottom: 3px solid transparent;
+    background-image: linear-gradient(to right, red, orange);
+    background-repeat: no-repeat; 
+    background-size: 100% 3px;
+    background-position: 0 100%;
+    padding-bottom: 10px;
+}
+
+
 
 @media (max-width: 768px) {
     .dashboard-container {

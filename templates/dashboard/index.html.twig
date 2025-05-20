@@ -9,8 +9,11 @@
 
 {% block body %}
 
+<div class="text-center mb-4 mt-4">
+    <h1 class="promotions">Ne manquez pas nos articles phares !</h1>
+</div>
 {# Carrousel #}
-<div id="featuredCarousel" class="carousel slide mt-4 mb-4" data-bs-ride="carousel">
+<div id="featuredCarousel" class="carousel slide carousel-fade mt-4 mb-4" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#featuredCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -27,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item"> 
             <div class="d-flex justify-content-center">
                 <div class="product-card">
                     <a href="{{ path('app_produit_show', { 'id': 8 }) }}">
@@ -56,6 +59,10 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
+</div>
+
+<div class="text-center mb-4">
+    <h1 class="popular">Ventes populaires</h1>
 </div>
 
 {# Autres produits #}

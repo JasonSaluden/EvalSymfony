@@ -43,6 +43,7 @@
                         <div class="actions-buttons">
                             <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn-modify">Voir</a>
                             <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn-modify">Modifier</a>
+                            {{ include('produit/_delete_form.html.twig', { produit: produit }) }}
                         </div>
                     </td>
 
@@ -57,6 +58,10 @@
         <div class="actions">
             <div class="total-panier">
                 <a href="{{ path('app_produit_new') }}" class="btn-success">Créer un nouveau produit</a>
+            </div>
+
+            <div>
+                <a href="{{ path('app_produit_deleted') }}" class="btn btn-warning">Voir les produits supprimés</a>
             </div>
 
             <div class="bottom-buttons">

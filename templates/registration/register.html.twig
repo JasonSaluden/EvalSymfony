@@ -18,7 +18,7 @@
         <h3>Informations personnelles</h3>
         {{ form_row(registrationForm.utilisateur.nom) }}
         {{ form_row(registrationForm.utilisateur.prenom) }}
-
+<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         <div class="checkbox-group">
             <label for="admin_role">Rôle admin</label>
             {{ form_row(registrationForm.adminRole) }}

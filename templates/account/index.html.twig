@@ -26,6 +26,10 @@
                         <label for="first_name" class="form-label">Date inscription :</label>
                         <input type="text" class="form-control" id="registration_date" value="{{ utilisateur.dateInscription|date('d/m/Y') }}" readonly>
                     </div>
+                    <div class="text-center">
+                        <h3 class="text-center">Une information est erronée ?</h3>
+                        <button type="button" class="btn-success" onclick="window.location.href='{{ path('contact_form') }}'">Contactez nous !</button>
+                    </div>
                 </div>
             </form>
         </div>

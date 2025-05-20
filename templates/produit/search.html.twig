@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultats pour "{{ query }}"{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/search.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container-search">
+        <h1>Résultats pour "{{ query }}"</h1>
+
+        {% if produits is empty %}
+            <p>Aucun produit trouvé.</p>
+        {% else %}
+            <div class="row">
+                {% for produit in produits %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            {% if produit.firstImage %}
+                                <img src="{{ asset(produit.getFirstImage()) }}" class="card-img-top" alt="{{ produit.nomProduit }}">
+                            {% endif %}
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">{{ produit.nomProduit }}</h5>
+                                <p class="card-text">
+                                    {{ produit.description|length > 100 ? produit.description[:100] ~ '...' : produit.description }}
+                                </p>
+                                <p class="card-text"><strong>{{ produit.prix }} €</strong></p>
+                                <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-primary mt-auto">Voir</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -34,5 +34,7 @@ services:
             - '@hwi_oauth.resource_owning_service'
             - '@security.authentication.manager'
             - '@user_repository'
+        
+
 
     # Autowiring works for all services by default, so no need to manually register basic ones

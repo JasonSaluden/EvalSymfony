@@ -7,11 +7,11 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container mt-4">
+    <div class="container example-wrapper mt-4">
         <h1>Produits de la catégorie {{ categorie.getNom()}}</h1>
 
         {% if produits is empty %}
-            <p>Aucun produit n'est disponible dans cette catégorie.</p>
+            <p>Aucun produit n'est disponible dans cette catégorie pour le moment.</p>
         {% else %}
             <div class="row">
                 {% for produit in produits %}
